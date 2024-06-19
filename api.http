@@ -1,4 +1,6 @@
-### Event GET
+### ------------------EVENT---------------------
+
+### All Events GET
 GET http://localhost:3000/events
 
 ### Event POST
@@ -6,10 +8,64 @@ POST http://localhost:3000/events
 Content-Type: application/json
 
 {
-    "name": "New Event",
-    "date": "2024-06-06T00:00:00",
+    "name": "New Event 1",
+    "date": "2024-06-20T00:00:00",
     "description": "This is a new event",
-    "price": 100
+    "price": 500
 }
+
+> {%
+
+    client.global.set("eventId", response.body.id)
+%}
+
+### Unique Events GET
+GET http://localhost:3000/events/{{eventId}}
+
+### Event PATCH
+PATCH http://localhost:3000/events/{{eventId}}
+Content-Type: application/json
+
+{
+  "name": "New Event UPDATE1",
+  "description": "teste"
+}
+
+
+
+### Events DELETE
+DELETE http://localhost:3000/events/{{eventId}}
+
+### ------------------SPOT---------------------
+
+### All Spot GET
+GET http://localhost:3000/events/{{eventId}}/spots
+
+### Spot POST
+POST http://localhost:3000/events/{{eventId}}/spots
+Content-Type: application/json
+
+{
+  "name": "New Spot 2"
+}
+
+> {%
+
+    client.global.set("spotId", response.body.id)
+%}
+
+### Unique Spot GET
+GET http://localhost:3000/events/{{eventId}}/spots/{{spotId}}
+
+### Spot PATCH
+PATCH http://localhost:3000/events/{{eventId}}/spots/{{spotId}}
+Content-Type: application/json
+
+{
+  "name": "New Spot UPDATE"
+}
+
+### Spot DELETE
+DELETE http://localhost:3000/events/{{eventId}}/spots/{{spotId}}
 
 ###

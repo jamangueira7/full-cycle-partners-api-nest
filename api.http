@@ -47,7 +47,7 @@ POST http://localhost:3000/events/{{eventId}}/spots
 Content-Type: application/json
 
 {
-  "name": "A3"
+  "name": "A4"
 }
 
 > {%
@@ -73,6 +73,7 @@ DELETE http://localhost:3000/events/{{eventId}}/spots/{{spotId}}
 ### Reserve POST
 POST http://localhost:3000/events/{{eventId}}/reserve
 Content-Type: application/json
+X-Api-Token: 123
 
 {
   "spots": ["{{spotName}}"],
@@ -157,6 +158,7 @@ DELETE http://localhost:3001/eventos/{{eventId}}/assento/{{spotId}}
 ### Reserve POST
 POST http://localhost:3001/eventos/{{eventId}}/reserve
 Content-Type: application/json
+X-Api-Token: 000
 
 {
   "spots": ["{{spotName}}"],

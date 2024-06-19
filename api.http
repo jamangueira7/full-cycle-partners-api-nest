@@ -8,10 +8,10 @@ POST http://localhost:3000/events
 Content-Type: application/json
 
 {
-    "name": "New Event 1",
+    "name": "New Event 2",
     "date": "2024-06-20T00:00:00",
     "description": "This is a new event",
-    "price": 500
+    "price": 222
 }
 
 > {%
@@ -46,12 +46,13 @@ POST http://localhost:3000/events/{{eventId}}/spots
 Content-Type: application/json
 
 {
-  "name": "New Spot 2"
+  "name": "A3"
 }
 
 > {%
 
     client.global.set("spotId", response.body.id)
+    client.global.set("spotName", response.body.name)
 %}
 
 ### Unique Spot GET
@@ -67,5 +68,15 @@ Content-Type: application/json
 
 ### Spot DELETE
 DELETE http://localhost:3000/events/{{eventId}}/spots/{{spotId}}
+
+### Reserve POST
+POST http://localhost:3000/events/{{eventId}}/reserve
+Content-Type: application/json
+
+{
+  "spots": ["{{spotName}}"],
+  "ticket_kind": "full",
+  "email": "teste@teste.com"
+}
 
 ###

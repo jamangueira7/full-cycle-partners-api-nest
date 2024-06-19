@@ -3,6 +3,7 @@ import { Partner2Module } from './partner2.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(Partner2Module);
+  console.log('PARTNER 2 CONNECTED!');
   await app.listen(3001);
 }
 bootstrap();

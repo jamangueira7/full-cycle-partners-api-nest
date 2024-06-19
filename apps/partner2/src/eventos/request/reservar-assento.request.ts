@@ -1,6 +1,6 @@
 import {TicketKind} from "@prisma/client";
 
-export class ReserveSpotRequest {
+export class ReservarAssentoRequest {
     spots: string[];
     ticket_kind: TicketKind;
     email: string;

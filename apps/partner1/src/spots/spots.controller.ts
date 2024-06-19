@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { SpotsService } from './spots.service';
+import { SpotsService } from '@app/core/spots/spots.service';
 import { CreateSpotRequest } from './request/create-spot.request';
 import { UpdateSpotRequest } from './request/update-spot.request';
 

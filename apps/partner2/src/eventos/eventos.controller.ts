@@ -1,15 +1,15 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete, HttpCode} from '@nestjs/common';
 import { EventsService } from '@app/core/events/events.service';
-import { CreateEventRequest } from './request/create-event.request';
-import { UpdateEventRequest } from './request/update-event.request';
-import {ReserveSpotRequest} from "./request/reserve-spot.request";
+import { CriarEventoRequest } from './request/criar-evento.request';
+import { AlterarEventosRequest } from './request/alterar-eventos.request';
+import {ReservarAssentoRequest} from "./request/reservar-assento.request";
 
-@Controller('events')
-export class EventsController {
+@Controller('eventos')
+export class EventosController {
   constructor(private readonly eventsService: EventsService) {}
 
   @Post()
-  create(@Body() createEventDto: CreateEventRequest) {
+  create(@Body() createEventDto: CriarEventoRequest) {
     return this.eventsService.create(createEventDto);
   }
 
@@ -24,7 +24,7 @@ export class EventsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEventDto: UpdateEventRequest) {
+  update(@Param('id') id: string, @Body() updateEventDto: AlterarEventosRequest) {
     return this.eventsService.update(id, updateEventDto);
   }
 
@@ -35,7 +35,7 @@ export class EventsController {
   }
 
   @Post(':id/reserve')
-  reserveSpots(@Param('id') id: string,  @Body() dto: ReserveSpotRequest) {
+  reserveSpots(@Param('id') id: string,  @Body() dto: ReservarAssentoRequest) {
     return this.eventsService.reserveSpot(id, dto);
   }
 }

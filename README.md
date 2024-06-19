@@ -7,7 +7,7 @@
 </p>
 <br>
 
-# API Contavel
+# API Venda de ingresso - Parceiros
 
 
 ## 🚀 Tecnologias
@@ -24,6 +24,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 ## 💻 Projeto
 
 Imersão [Full Cycle](https://fullcycle.com.br/) 21 - Primeiro projeto é um API me NestJS simulando a reserva de ingressos para show.
+É aqui que se cadastra o evento, os lugares e se reserva os lugares;
 
 Professor [Luiz Carlos](https://www.linkedin.com/in/argentinaluiz/).
 
@@ -60,6 +61,192 @@ Professor [Luiz Carlos](https://www.linkedin.com/in/argentinaluiz/).
       $ npm run start:dev -- partner2
     ```
 - Teste a API rodando cada chamada do arquivo api.http.
+
+## ↗ Rotas
+
+- **`GET /events`**: Roda para ver todos os eventos
+
+Retorna:
+```
+[
+  {
+    "id": "clxmauwxz0000sn3unou5r2kk",
+    "name": "New Event 2",
+    "description": "This is a new event",
+    "date": "2024-06-20T00:00:00.000Z",
+    "price": 222,
+    "createdAt": "2024-06-19T20:42:37.511Z",
+    "updatedAt": "2024-06-19T20:42:37.511Z"
+  },
+]
+```
+
+- **`POST /events`**: Rota para criar um evento
+
+envia:
+```
+{
+    "name": "New Event 2",
+    "date": "2024-06-20T00:00:00",
+    "description": "This is a new event",
+    "price": 222
+}
+```
+
+Retorna:
+```
+{
+  "id": "clxmeojik00005o23x9u6171v",
+  "name": "New Event 2",
+  "description": "This is a new event",
+  "date": "2024-06-20T00:00:00.000Z",
+  "price": 222,
+  "createdAt": "2024-06-19T22:29:38.636Z",
+  "updatedAt": "2024-06-19T22:29:38.636Z"
+}
+```
+
+- **`GET /events/:id`**: Roda para ver um evento
+
+Retorna:
+```
+{
+  "id": "clxmauwxz0000sn3unou5r2kk",
+  "name": "New Event 2",
+  "description": "This is a new event",
+  "date": "2024-06-20T00:00:00.000Z",
+  "price": 222,
+  "createdAt": "2024-06-19T20:42:37.511Z",
+  "updatedAt": "2024-06-19T20:42:37.511Z"
+}
+```
+
+- **`PATCH /events/:id`**: Rota para alterar um evento
+
+envia:
+```
+{
+  "name": "New Event UPDATE1",
+  "description": "teste"
+}
+```
+
+Retorna:
+```
+{
+  "id": "clxmeojik00005o23x9u6171v",
+  "name": "New Event UPDATE1",
+  "description": "teste",
+  "date": "2024-06-20T00:00:00.000Z",
+  "price": 222,
+  "createdAt": "2024-06-19T22:29:38.636Z",
+  "updatedAt": "2024-06-19T22:31:42.128Z"
+}
+```
+
+- **`DELETE /events/:id`**: Rota para deletar um evento
+
+- **`GET /events/:id/spots`**: Roda para ver todos os assentos de um evento
+
+Retorna:
+```
+[
+  {
+    "id": "clxmauwxz0000sn3unou5r2kk",
+    "name": "New Event 2",
+    "description": "This is a new event",
+    "date": "2024-06-20T00:00:00.000Z",
+    "price": 222,
+    "createdAt": "2024-06-19T20:42:37.511Z",
+    "updatedAt": "2024-06-19T20:42:37.511Z"
+  },
+]
+```
+
+- **`POST /events/:id/spots`**: Rota para criar um assento para um evento
+
+envia:
+```
+
+{
+  "name": "A4"
+}
+```
+
+Retorna:
+```
+{
+  "id": "clxmetvky00025o23tzcujtxf",
+  "name": "A4",
+  "status": "available",
+  "createdAt": "2024-06-19T22:33:47.554Z",
+  "updatedAt": "2024-06-19T22:33:47.554Z",
+  "eventId": "clxmeojik00005o23x9u6171v"
+}
+```
+
+- **`GET /events/:id/spots/:id`**: Roda para ver um assento de um evento
+
+Retorna:
+```
+{
+  "id": "clxmetvky00025o23tzcujtxf",
+  "name": "A4",
+  "status": "available",
+  "createdAt": "2024-06-19T22:33:47.554Z",
+  "updatedAt": "2024-06-19T22:33:47.554Z",
+  "eventId": "clxmeojik00005o23x9u6171v"
+}
+```
+
+- **`PATCH /events/:id/spots/:id`**: Rota para alterar um assento de um evento
+
+envia:
+```
+{
+  "name": "New Spot UPDATE"
+}
+```
+
+Retorna:
+```
+{
+  "id": "clxmetvky00025o23tzcujtxf",
+  "name": "New Spot UPDATE",
+  "status": "available",
+  "createdAt": "2024-06-19T22:33:47.554Z",
+  "updatedAt": "2024-06-19T22:35:33.774Z",
+  "eventId": "clxmeojik00005o23x9u6171v"
+}
+```
+
+- **`DELETE /events/:id/spots/:id`**: Rota para deletar um assento de evento
+
+
+- **`POST /events/:id/reserve`**: Rota para reservar assentos de um evento
+
+envia:
+```
+{
+  "spots": ["A1", "A2", "A3"],
+  "ticket_kind": "full",
+  "email": "teste@teste.com"
+}
+```
+
+Retorna:
+```
+[
+  {
+    "id": "clxmezm7x00085o23t6u9duwx",
+    "email": "teste@teste.com",
+    "ticketKind": "full",
+    "createdAt": "2024-06-19T22:38:15.353Z",
+    "updatedAt": "2024-06-19T22:38:15.353Z",
+    "spotId": "clxmezj2200045o23pmxya1qd"
+  }
+]
+```
 
 ## 🤔 Como contribuir
 
